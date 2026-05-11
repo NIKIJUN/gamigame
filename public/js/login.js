@@ -21,7 +21,7 @@ togglePassword.addEventListener("click", () => {
   togglePassword.textContent = isPassword ? "Sembunyikan" : "Lihat";
 });
 
-loginForm.addEventListener("submit", async (event) => {
+loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
   hideAlert();
 
@@ -38,21 +38,23 @@ loginForm.addEventListener("submit", async (event) => {
 
   setTimeout(() => {
     localStorage.setItem("gamigame_token", "dummy-token-preview");
+
     localStorage.setItem(
       "gamigame_user",
       JSON.stringify({
-        id: "preview-user",
-        full_name: "Preview User",
-        username: "preview",
-        email,
-        role: "student",
+        id: "preview-teacher",
+        full_name: "Guru",
+        username: "guru",
+        email: email,
+        role: "teacher",
         is_active: true,
       })
     );
 
-    showAlert("success", "Preview login berhasil. Backend belum terhubung ke MongoDB.");
+    showAlert("success", "Login berhasil. Mengalihkan ke dashboard guru...");
 
-    loginButton.disabled = false;
-    loginButton.textContent = "Login";
+    setTimeout(() => {
+      window.location.href = "/dashboard-teacher";
+    }, 800);
   }, 700);
 });

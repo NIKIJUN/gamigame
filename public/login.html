@@ -83,19 +83,15 @@
                 </button>
               </form>
 
-              <div class="text-center mt-4">
-                <p class="mb-1 text-muted">Belum punya akun?</p>
-                <div class="d-flex gap-2 justify-content-center flex-wrap">
-                  <a href="/register-student.html" class="small">
-                    Daftar Siswa
-                  </a>
-                  <span class="text-muted small">|</span>
-                  <a href="/register-teacher.html" class="small">
-                    Daftar Guru
-                  </a>
-                </div>
-              </div>
+              
             </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <p class="mb-0 text-muted">
+              Belum punya akun?
+              <a href="/register">Daftar di sini</a>
+            </p>
           </div>
 
           <p class="text-center text-white-50 small mt-4 mb-0">
@@ -106,6 +102,9 @@
     </div>
   </main>
 
-  <script src="/js/login.js"></script>
+  <script src="/js/login.js">
+    window.location.href = "/dashboard-student";
+
+  </script>
 </body>
 </html>
