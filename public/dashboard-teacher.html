@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Dashboard Guru - Gamigame</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/css/dashboard-teacher.css" />
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="bi bi-controller"></i>
+        </div>
+        <span>Gami<span>game</span></span>
+      </div>
+
+      <div class="role-badge">
+        <i class="bi bi-person-workspace"></i>
+        <span>Guru/Admin</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="/dashboard-teacher" class="menu-item active">
+          <i class="bi bi-grid-1x2-fill"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#materiSection" class="menu-item">
+          <i class="bi bi-book-fill"></i>
+          <span>Manajemen Materi</span>
+        </a>
+
+        <a href="#quizSection" class="menu-item">
+          <i class="bi bi-journal-check"></i>
+          <span>Manajemen Kuis</span>
+        </a>
+
+        <a href="#laporanSection" class="menu-item">
+          <i class="bi bi-clipboard-data-fill"></i>
+          <span>Laporan Siswa</span>
+        </a>
+
+        <a href="#" class="menu-item">
+          <i class="bi bi-people-fill"></i>
+          <span>Data Siswa</span>
+        </a>
+
+        <a href="#" class="menu-item">
+          <i class="bi bi-gear-fill"></i>
+          <span>Pengaturan</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-card">
+        <h6>Panel Guru</h6>
+        <p>Kelola materi, kuis, dan pantau perkembangan belajar siswa dalam satu tempat.</p>
+        <i class="bi bi-mortarboard-fill"></i>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="btn menu-button" id="toggleSidebar">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="topbar-title">
+          <h5>Dashboard Guru</h5>
+          <small>Kelola pembelajaran gamifikasi dengan mudah</small>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#materialModal">
+            <i class="bi bi-plus-circle-fill"></i>
+            Tambah Materi
+          </button>
+
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#quizModal">
+            <i class="bi bi-plus-circle-fill"></i>
+            Buat Kuis
+          </button>
+
+          <div class="profile">
+            <div class="avatar">G</div>
+            <div>
+              <strong id="teacherNameTop">Guru</strong>
+              <small>Teacher</small>
+            </div>
+          </div>
+
+          <button class="btn logout-btn" id="logoutButton">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+      </header>
+
+      <section class="welcome-section">
+        <div>
+          <span class="welcome-badge">
+            <i class="bi bi-person-workspace"></i>
+            Panel Pengajar
+          </span>
+          <h1>Halo, <span id="teacherName">Guru</span>! 👋</h1>
+          <p>
+            Kelola materi, kuis, dan pantau perkembangan siswa dengan navigasi yang jelas.
+          </p>
+        </div>
+
+        <div class="hero-icon">
+          <i class="bi bi-kanban-fill"></i>
+        </div>
+      </section>
+
+      <section class="summary-grid">
+        <div class="summary-card purple">
+          <div class="summary-icon">
+            <i class="bi bi-book-fill"></i>
+          </div>
+          <div>
+            <p>Total Materi</p>
+            <h3 id="totalMaterials">12</h3>
+            <small>4 materi aktif minggu ini</small>
+          </div>
+        </div>
+
+        <div class="summary-card green">
+          <div class="summary-icon">
+            <i class="bi bi-journal-check"></i>
+          </div>
+          <div>
+            <p>Total Kuis</p>
+            <h3 id="totalQuizzes">8</h3>
+            <small>3 kuis sedang aktif</small>
+          </div>
+        </div>
+
+        <div class="summary-card blue">
+          <div class="summary-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <div>
+            <p>Siswa Terdaftar</p>
+            <h3>36</h3>
+            <small>Kelas X RPL</small>
+          </div>
+        </div>
+
+        <div class="summary-card orange">
+          <div class="summary-icon">
+            <i class="bi bi-bar-chart-fill"></i>
+          </div>
+          <div>
+            <p>Rata-rata Nilai</p>
+            <h3>82</h3>
+            <small>Naik 8% dari minggu lalu</small>
+          </div>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="left-content">
+          <section class="card-section" id="materiSection">
+            <div class="section-header">
+              <div>
+                <h5>
+                  <i class="bi bi-book-fill text-primary"></i>
+                  Manajemen Materi
+                </h5>
+                <small>Tambah, ubah, atau hapus materi pembelajaran.</small>
+              </div>
+
+              <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#materialModal">
+                <i class="bi bi-plus-circle"></i>
+                Tambah Materi
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>Judul Materi</th>
+                    <th>Mapel</th>
+                    <th>Status</th>
+                    <th>Kuis Terkait</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody id="materialTableBody">
+                  <tr>
+                    <td>
+                      <strong>Aljabar dan Persamaan Linear</strong>
+                      <small>Materi dasar matematika kelas X</small>
+                    </td>
+                    <td>Matematika</td>
+                    <td><span class="status active">Aktif</span></td>
+                    <td>Kuis Aljabar</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Teks Eksplanasi</strong>
+                      <small>Struktur dan ciri kebahasaan</small>
+                    </td>
+                    <td>Bahasa Indonesia</td>
+                    <td><span class="status draft">Draft</span></td>
+                    <td>Belum ada</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Sistem Pernapasan Manusia</strong>
+                      <small>Organ dan proses pernapasan</small>
+                    </td>
+                    <td>IPA</td>
+                    <td><span class="status active">Aktif</span></td>
+                    <td>Kuis IPA</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card-section" id="quizSection">
+            <div class="section-header">
+              <div>
+                <h5>
+                  <i class="bi bi-journal-check text-success"></i>
+                  Manajemen Kuis
+                </h5>
+                <small>Buat soal kuis yang terhubung dengan materi.</small>
+              </div>
+
+              <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#quizModal">
+                <i class="bi bi-plus-circle"></i>
+                Buat Kuis
+              </button>
+            </div>
+
+            <div class="quiz-list">
+              <div class="quiz-item">
+                <div class="quiz-icon purple-icon">
+                  <i class="bi bi-calculator-fill"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Kuis Aljabar</h6>
+                  <p>Terhubung dengan materi: Aljabar dan Persamaan Linear</p>
+                  <div class="quiz-meta">
+                    <span>5 Soal</span>
+                    <span>+100 Poin</span>
+                    <span>Aktif</span>
+                  </div>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-sm btn-outline-primary">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
+                </div>
+              </div>
+
+              <div class="quiz-item">
+                <div class="quiz-icon blue-icon">
+                  <i class="bi bi-flask"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Kuis IPA Sistem Pernapasan</h6>
+                  <p>Terhubung dengan materi: Sistem Pernapasan Manusia</p>
+                  <div class="quiz-meta">
+                    <span>10 Soal</span>
+                    <span>+150 Poin</span>
+                    <span>Aktif</span>
+                  </div>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-sm btn-outline-primary">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
+                </div>
+              </div>
+
+              <div class="quiz-item">
+                <div class="quiz-icon orange-icon">
+                  <i class="bi bi-bank2"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Kuis Sejarah Nasional</h6>
+                  <p>Terhubung dengan materi: Pergerakan Nasional</p>
+                  <div class="quiz-meta">
+                    <span>8 Soal</span>
+                    <span>+120 Poin</span>
+                    <span>Draft</span>
+                  </div>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-sm btn-outline-primary">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card-section" id="laporanSection">
+            <div class="section-header">
+              <div>
+                <h5>
+                  <i class="bi bi-clipboard-data-fill text-warning"></i>
+                  Laporan Hasil Kuis Siswa
+                </h5>
+                <small>Pantau skor, progres, dan status pengerjaan siswa.</small>
+              </div>
+
+              <button class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-download"></i>
+                Export
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>Nama Siswa</th>
+                    <th>Kuis</th>
+                    <th>Skor</th>
+                    <th>Poin</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Fahmira</strong>
+                      <small>X RPL</small>
+                    </td>
+                    <td>Kuis Aljabar</td>
+                    <td><strong class="text-success">90</strong></td>
+                    <td>+90</td>
+                    <td><span class="status active">Selesai</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Aulia</strong>
+                      <small>X RPL</small>
+                    </td>
+                    <td>Kuis IPA</td>
+                    <td><strong class="text-success">95</strong></td>
+                    <td>+95</td>
+                    <td><span class="status active">Selesai</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Nanda</strong>
+                      <small>X RPL</small>
+                    </td>
+                    <td>Kuis Aljabar</td>
+                    <td><strong class="text-warning">70</strong></td>
+                    <td>+70</td>
+                    <td><span class="status pending">Perlu Review</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Riko</strong>
+                      <small>X RPL</small>
+                    </td>
+                    <td>Kuis Sejarah</td>
+                    <td><strong class="text-secondary">-</strong></td>
+                    <td>-</td>
+                    <td><span class="status draft">Belum Mengerjakan</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <aside class="right-content">
+          <div class="side-card">
+            <h5>Aktivitas Terbaru</h5>
+
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon green-bg">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div>
+                  <strong>Fahmira menyelesaikan Kuis Aljabar</strong>
+                  <small>10 menit yang lalu</small>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon blue-bg">
+                  <i class="bi bi-book-fill"></i>
+                </div>
+                <div>
+                  <strong>Materi IPA diperbarui</strong>
+                  <small>1 jam yang lalu</small>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon purple-bg">
+                  <i class="bi bi-journal-plus"></i>
+                </div>
+                <div>
+                  <strong>Kuis Sejarah dibuat</strong>
+                  <small>2 jam yang lalu</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <h5>Performa Kelas</h5>
+
+            <div class="performance-box">
+              <div class="circle-progress">
+                <div class="circle-inner">
+                  <strong>82%</strong>
+                  <small>rata-rata</small>
+                </div>
+              </div>
+
+              <p>
+                Sebagian besar siswa menunjukkan perkembangan baik pada materi minggu ini.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <h5>Top Siswa</h5>
+
+            <div class="top-student">
+              <span>1</span>
+              <strong>Aulia</strong>
+              <small>1.450 poin</small>
+            </div>
+
+            <div class="top-student">
+              <span>2</span>
+              <strong>Fahmira</strong>
+              <small>1.250 poin</small>
+            </div>
+
+            <div class="top-student">
+              <span>3</span>
+              <strong>Nanda</strong>
+              <small>980 poin</small>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Tambah Materi -->
+  <div class="modal fade" id="materialModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content custom-modal">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Materi Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="materialForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Judul Materi</label>
+              <input type="text" class="form-control" id="materialTitle" placeholder="Contoh: Aljabar dan Persamaan Linear" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mata Pelajaran</label>
+              <select class="form-select" id="materialSubject" required>
+                <option value="">Pilih mata pelajaran</option>
+                <option>Matematika</option>
+                <option>Bahasa Indonesia</option>
+                <option>IPA</option>
+                <option>Sejarah</option>
+                <option>Bahasa Inggris</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Deskripsi Singkat</label>
+              <textarea class="form-control" id="materialDescription" rows="3" placeholder="Tulis ringkasan materi..." required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="materialStatus">
+                <option value="Aktif">Aktif</option>
+                <option value="Draft">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan Materi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Buat Kuis -->
+  <div class="modal fade" id="quizModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content custom-modal">
+        <div class="modal-header">
+          <h5 class="modal-title">Buat Kuis Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="quizForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Judul Kuis</label>
+              <input type="text" class="form-control" id="quizTitle" placeholder="Contoh: Kuis Aljabar" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Materi Terkait</label>
+              <select class="form-select" id="quizMaterial" required>
+                <option value="">Pilih materi</option>
+                <option>Aljabar dan Persamaan Linear</option>
+                <option>Teks Eksplanasi</option>
+                <option>Sistem Pernapasan Manusia</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Jumlah Soal</label>
+                <input type="number" class="form-control" id="quizQuestionCount" min="1" value="5" required />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Poin Maksimal</label>
+                <input type="number" class="form-control" id="quizPoints" min="10" value="100" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Contoh Soal Pertama</label>
+              <textarea class="form-control" id="quizQuestion" rows="3" placeholder="Tulis contoh soal..." required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="quizStatus">
+                <option value="Aktif">Aktif</option>
+                <option value="Draft">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-success">Simpan Kuis</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <script src="/js/dashboard-teacher.js"></script>
+</body>
+</html>
