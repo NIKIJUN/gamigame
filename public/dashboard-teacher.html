@@ -41,12 +41,17 @@
 
         <a href="#materiSection" class="menu-item">
           <i class="bi bi-book-fill"></i>
-          <span>Manajemen Materi</span>
+          <span>Materi English</span>
         </a>
 
         <a href="#quizSection" class="menu-item">
           <i class="bi bi-journal-check"></i>
-          <span>Manajemen Kuis</span>
+          <span>Kuis English</span>
+        </a>
+
+        <a href="#pengayaanSection" class="menu-item">
+          <i class="bi bi-stars"></i>
+          <span>Materi Pengayaan</span>
         </a>
 
         <a href="#laporanSection" class="menu-item">
@@ -54,20 +59,18 @@
           <span>Laporan Siswa</span>
         </a>
 
-        <a href="#" class="menu-item">
-          <i class="bi bi-people-fill"></i>
-          <span>Data Siswa</span>
-        </a>
-
-        <a href="#" class="menu-item">
-          <i class="bi bi-gear-fill"></i>
-          <span>Pengaturan</span>
+        <a href="#decisionTreeSection" class="menu-item">
+          <i class="bi bi-diagram-3-fill"></i>
+          <span>Decision Tree</span>
         </a>
       </nav>
 
       <div class="sidebar-card">
-        <h6>Panel Guru</h6>
-        <p>Kelola materi, kuis, dan pantau perkembangan belajar siswa dalam satu tempat.</p>
+        <h6>Panel Guru English</h6>
+        <p>
+          Kelola materi, kuis, pengayaan, dan pantau hasil belajar siswa berbasis
+          gamifikasi.
+        </p>
         <i class="bi bi-mortarboard-fill"></i>
       </div>
     </aside>
@@ -80,7 +83,7 @@
 
         <div class="topbar-title">
           <h5>Dashboard Guru</h5>
-          <small>Kelola pembelajaran gamifikasi dengan mudah</small>
+          <small>Manajemen pembelajaran Bahasa Inggris berbasis gamifikasi</small>
         </div>
 
         <div class="topbar-right">
@@ -97,7 +100,7 @@
           <div class="profile">
             <div class="avatar">G</div>
             <div>
-              <strong id="teacherNameTop">Guru</strong>
+              <strong id="teacherNameTop">Guru Gamigame</strong>
               <small>Teacher</small>
             </div>
           </div>
@@ -112,16 +115,19 @@
         <div>
           <span class="welcome-badge">
             <i class="bi bi-person-workspace"></i>
-            Panel Pengajar
+            English Learning Management
           </span>
-          <h1>Halo, <span id="teacherName">Guru</span>! 👋</h1>
+
+          <h1>Halo, <span id="teacherName">Guru Gamigame</span>! 👋</h1>
+
           <p>
-            Kelola materi, kuis, dan pantau perkembangan siswa dengan navigasi yang jelas.
+            Kelola materi Bahasa Inggris, buat kuis, siapkan materi pengayaan,
+            dan pantau rekomendasi belajar siswa dari Decision Tree.
           </p>
         </div>
 
         <div class="hero-icon">
-          <i class="bi bi-kanban-fill"></i>
+          <i class="bi bi-translate"></i>
         </div>
       </section>
 
@@ -131,9 +137,9 @@
             <i class="bi bi-book-fill"></i>
           </div>
           <div>
-            <p>Total Materi</p>
+            <p>Total Materi English</p>
             <h3 id="totalMaterials">12</h3>
-            <small>4 materi aktif minggu ini</small>
+            <small>Vocabulary, grammar, reading, speaking</small>
           </div>
         </div>
 
@@ -150,23 +156,23 @@
 
         <div class="summary-card blue">
           <div class="summary-icon">
-            <i class="bi bi-people-fill"></i>
+            <i class="bi bi-stars"></i>
           </div>
           <div>
-            <p>Siswa Terdaftar</p>
-            <h3>36</h3>
-            <small>Kelas X RPL</small>
+            <p>Materi Pengayaan</p>
+            <h3>5</h3>
+            <small>Untuk siswa dengan skor tinggi</small>
           </div>
         </div>
 
         <div class="summary-card orange">
           <div class="summary-icon">
-            <i class="bi bi-bar-chart-fill"></i>
+            <i class="bi bi-diagram-3-fill"></i>
           </div>
           <div>
-            <p>Rata-rata Nilai</p>
-            <h3>82</h3>
-            <small>Naik 8% dari minggu lalu</small>
+            <p>Rekomendasi Sistem</p>
+            <h3>18</h3>
+            <small>Dari hasil Decision Tree</small>
           </div>
         </div>
       </section>
@@ -178,9 +184,9 @@
               <div>
                 <h5>
                   <i class="bi bi-book-fill text-primary"></i>
-                  Manajemen Materi
+                  Manajemen Materi English
                 </h5>
-                <small>Tambah, ubah, atau hapus materi pembelajaran.</small>
+                <small>Tambah, ubah, atau hapus materi pembelajaran Bahasa Inggris.</small>
               </div>
 
               <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#materialModal">
@@ -194,7 +200,8 @@
                 <thead>
                   <tr>
                     <th>Judul Materi</th>
-                    <th>Mapel</th>
+                    <th>Kategori</th>
+                    <th>Jenis</th>
                     <th>Status</th>
                     <th>Kuis Terkait</th>
                     <th>Aksi</th>
@@ -204,12 +211,13 @@
                 <tbody id="materialTableBody">
                   <tr>
                     <td>
-                      <strong>Aljabar dan Persamaan Linear</strong>
-                      <small>Materi dasar matematika kelas X</small>
+                      <strong>Vocabulary: Daily Activities</strong>
+                      <small>Kosakata aktivitas sehari-hari</small>
                     </td>
-                    <td>Matematika</td>
+                    <td>Vocabulary</td>
+                    <td><span class="status active">Dasar</span></td>
                     <td><span class="status active">Aktif</span></td>
-                    <td>Kuis Aljabar</td>
+                    <td>Daily Routine Quiz</td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary action-btn edit-material">
                         <i class="bi bi-pencil-square"></i>
@@ -222,30 +230,51 @@
 
                   <tr>
                     <td>
-                      <strong>Teks Eksplanasi</strong>
-                      <small>Struktur dan ciri kebahasaan</small>
+                      <strong>Grammar: Simple Present Tense</strong>
+                      <small>Pola kalimat kebiasaan dan rutinitas</small>
                     </td>
-                    <td>Bahasa Indonesia</td>
+                    <td>Grammar</td>
+                    <td><span class="status active">Dasar</span></td>
+                    <td><span class="status active">Aktif</span></td>
+                    <td>Simple Present Quiz</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Daily Conversation Practice</strong>
+                      <small>Latihan percakapan sehari-hari</small>
+                    </td>
+                    <td>Speaking</td>
+                    <td><span class="status pending">Pengayaan</span></td>
+                    <td><span class="status active">Aktif</span></td>
+                    <td>Conversation Quiz</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>Reading: My Daily Routine</strong>
+                      <small>Teks pendek tentang kegiatan harian</small>
+                    </td>
+                    <td>Reading</td>
+                    <td><span class="status draft">Latihan</span></td>
                     <td><span class="status draft">Draft</span></td>
                     <td>Belum ada</td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary action-btn edit-material">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger action-btn delete-row">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <strong>Sistem Pernapasan Manusia</strong>
-                      <small>Organ dan proses pernapasan</small>
-                    </td>
-                    <td>IPA</td>
-                    <td><span class="status active">Aktif</span></td>
-                    <td>Kuis IPA</td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary action-btn edit-material">
                         <i class="bi bi-pencil-square"></i>
@@ -265,9 +294,9 @@
               <div>
                 <h5>
                   <i class="bi bi-journal-check text-success"></i>
-                  Manajemen Kuis
+                  Manajemen Kuis English
                 </h5>
-                <small>Buat soal kuis yang terhubung dengan materi.</small>
+                <small>Buat soal kuis yang terhubung dengan materi English.</small>
               </div>
 
               <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#quizModal">
@@ -279,14 +308,14 @@
             <div class="quiz-list">
               <div class="quiz-item">
                 <div class="quiz-icon purple-icon">
-                  <i class="bi bi-calculator-fill"></i>
+                  <i class="bi bi-card-text"></i>
                 </div>
 
                 <div class="quiz-info">
-                  <h6>Kuis Aljabar</h6>
-                  <p>Terhubung dengan materi: Aljabar dan Persamaan Linear</p>
+                  <h6>Daily Routine Vocabulary Quiz</h6>
+                  <p>Terhubung dengan materi: Vocabulary: Daily Activities</p>
                   <div class="quiz-meta">
-                    <span>5 Soal</span>
+                    <span>10 Soal</span>
                     <span>+100 Poin</span>
                     <span>Aktif</span>
                   </div>
@@ -300,15 +329,15 @@
 
               <div class="quiz-item">
                 <div class="quiz-icon blue-icon">
-                  <i class="bi bi-flask"></i>
+                  <i class="bi bi-pencil-square"></i>
                 </div>
 
                 <div class="quiz-info">
-                  <h6>Kuis IPA Sistem Pernapasan</h6>
-                  <p>Terhubung dengan materi: Sistem Pernapasan Manusia</p>
+                  <h6>Simple Present Tense Quiz</h6>
+                  <p>Terhubung dengan materi: Grammar: Simple Present Tense</p>
                   <div class="quiz-meta">
                     <span>10 Soal</span>
-                    <span>+150 Poin</span>
+                    <span>+100 Poin</span>
                     <span>Aktif</span>
                   </div>
                 </div>
@@ -321,16 +350,81 @@
 
               <div class="quiz-item">
                 <div class="quiz-icon orange-icon">
-                  <i class="bi bi-bank2"></i>
+                  <i class="bi bi-chat-dots-fill"></i>
                 </div>
 
                 <div class="quiz-info">
-                  <h6>Kuis Sejarah Nasional</h6>
-                  <p>Terhubung dengan materi: Pergerakan Nasional</p>
+                  <h6>Daily Conversation Practice Quiz</h6>
+                  <p>Terhubung dengan materi pengayaan: Daily Conversation Practice</p>
                   <div class="quiz-meta">
-                    <span>8 Soal</span>
+                    <span>10 Soal</span>
+                    <span>+100 Poin</span>
+                    <span>Pengayaan</span>
+                  </div>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-sm btn-outline-primary">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card-section" id="pengayaanSection">
+            <div class="section-header">
+              <div>
+                <h5>
+                  <i class="bi bi-stars text-warning"></i>
+                  Materi Pengayaan
+                </h5>
+                <small>Materi lanjutan untuk siswa yang sudah mencapai skor tinggi.</small>
+              </div>
+
+              <button class="btn btn-warning btn-sm text-white" data-bs-toggle="modal" data-bs-target="#materialModal">
+                <i class="bi bi-plus-circle"></i>
+                Tambah Pengayaan
+              </button>
+            </div>
+
+            <div class="quiz-list">
+              <div class="quiz-item">
+                <div class="quiz-icon orange-icon">
+                  <i class="bi bi-stars"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Daily Conversation Practice</h6>
+                  <p>
+                    Direkomendasikan untuk siswa dengan skor vocabulary ≥ 80 dan grammar ≥ 70.
+                  </p>
+                  <div class="quiz-meta">
+                    <span>Speaking</span>
+                    <span>Intermediate</span>
+                    <span>Decision Tree</span>
+                  </div>
+                </div>
+
+                <div class="quiz-actions">
+                  <button class="btn btn-sm btn-outline-primary">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger">Hapus</button>
+                </div>
+              </div>
+
+              <div class="quiz-item">
+                <div class="quiz-icon purple-icon">
+                  <i class="bi bi-mic-fill"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Introduce Yourself Practice</h6>
+                  <p>
+                    Materi pengayaan speaking untuk siswa yang sudah menguasai basic vocabulary.
+                  </p>
+                  <div class="quiz-meta">
+                    <span>Speaking</span>
+                    <span>Enrichment</span>
                     <span>+120 Poin</span>
-                    <span>Draft</span>
                   </div>
                 </div>
 
@@ -349,7 +443,7 @@
                   <i class="bi bi-clipboard-data-fill text-warning"></i>
                   Laporan Hasil Kuis Siswa
                 </h5>
-                <small>Pantau skor, progres, dan status pengerjaan siswa.</small>
+                <small>Pantau skor, poin, dan rekomendasi belajar siswa.</small>
               </div>
 
               <button class="btn btn-outline-primary btn-sm">
@@ -366,6 +460,7 @@
                     <th>Kuis</th>
                     <th>Skor</th>
                     <th>Poin</th>
+                    <th>Rekomendasi</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -376,9 +471,10 @@
                       <strong>Fahmira</strong>
                       <small>X RPL</small>
                     </td>
-                    <td>Kuis Aljabar</td>
+                    <td>Daily Conversation Quiz</td>
                     <td><strong class="text-success">90</strong></td>
                     <td>+90</td>
+                    <td><span class="status pending">Pengayaan</span></td>
                     <td><span class="status active">Selesai</span></td>
                   </tr>
 
@@ -387,9 +483,10 @@
                       <strong>Aulia</strong>
                       <small>X RPL</small>
                     </td>
-                    <td>Kuis IPA</td>
+                    <td>Vocabulary Quiz</td>
                     <td><strong class="text-success">95</strong></td>
                     <td>+95</td>
+                    <td><span class="status pending">Pengayaan</span></td>
                     <td><span class="status active">Selesai</span></td>
                   </tr>
 
@@ -398,10 +495,11 @@
                       <strong>Nanda</strong>
                       <small>X RPL</small>
                     </td>
-                    <td>Kuis Aljabar</td>
-                    <td><strong class="text-warning">70</strong></td>
-                    <td>+70</td>
-                    <td><span class="status pending">Perlu Review</span></td>
+                    <td>Simple Present Quiz</td>
+                    <td><strong class="text-warning">72</strong></td>
+                    <td>+72</td>
+                    <td><span class="status active">Latihan</span></td>
+                    <td><span class="status active">Selesai</span></td>
                   </tr>
 
                   <tr>
@@ -409,13 +507,82 @@
                       <strong>Riko</strong>
                       <small>X RPL</small>
                     </td>
-                    <td>Kuis Sejarah</td>
-                    <td><strong class="text-secondary">-</strong></td>
-                    <td>-</td>
-                    <td><span class="status draft">Belum Mengerjakan</span></td>
+                    <td>Vocabulary Quiz</td>
+                    <td><strong class="text-danger">45</strong></td>
+                    <td>+45</td>
+                    <td><span class="status draft">Remedial</span></td>
+                    <td><span class="status pending">Perlu Bimbingan</span></td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          <section class="card-section" id="decisionTreeSection">
+            <div class="section-header">
+              <div>
+                <h5>
+                  <i class="bi bi-diagram-3-fill text-primary"></i>
+                  Aturan Decision Tree
+                </h5>
+                <small>Simulasi aturan rekomendasi belajar berdasarkan hasil kuis siswa.</small>
+              </div>
+            </div>
+
+            <div class="quiz-list">
+              <div class="quiz-item">
+                <div class="quiz-icon blue-icon">
+                  <i class="bi bi-1-circle-fill"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Skor ≥ 85</h6>
+                  <p>
+                    Siswa memahami materi dengan sangat baik dan diarahkan ke
+                    materi pengayaan.
+                  </p>
+                  <div class="quiz-meta">
+                    <span>Output: Pengayaan</span>
+                    <span>Contoh: Conversation Practice</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quiz-item">
+                <div class="quiz-icon purple-icon">
+                  <i class="bi bi-2-circle-fill"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Skor 60 - 84</h6>
+                  <p>
+                    Siswa cukup memahami materi, tetapi masih perlu latihan tambahan
+                    untuk memperkuat pemahaman.
+                  </p>
+                  <div class="quiz-meta">
+                    <span>Output: Latihan Tambahan</span>
+                    <span>Contoh: Simple Present Practice</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quiz-item">
+                <div class="quiz-icon orange-icon">
+                  <i class="bi bi-3-circle-fill"></i>
+                </div>
+
+                <div class="quiz-info">
+                  <h6>Skor &lt; 60</h6>
+                  <p>
+                    Siswa perlu mengulang materi dasar atau mendapatkan remedial
+                    sebelum masuk ke materi berikutnya.
+                  </p>
+                  <div class="quiz-meta">
+                    <span>Output: Remedial</span>
+                    <span>Contoh: Basic Vocabulary Review</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </section>
@@ -430,7 +597,7 @@
                   <i class="bi bi-check-circle-fill"></i>
                 </div>
                 <div>
-                  <strong>Fahmira menyelesaikan Kuis Aljabar</strong>
+                  <strong>Fahmira menyelesaikan Daily Conversation Quiz</strong>
                   <small>10 menit yang lalu</small>
                 </div>
               </div>
@@ -440,17 +607,17 @@
                   <i class="bi bi-book-fill"></i>
                 </div>
                 <div>
-                  <strong>Materi IPA diperbarui</strong>
+                  <strong>Materi Simple Present Tense diperbarui</strong>
                   <small>1 jam yang lalu</small>
                 </div>
               </div>
 
               <div class="activity-item">
                 <div class="activity-icon purple-bg">
-                  <i class="bi bi-journal-plus"></i>
+                  <i class="bi bi-stars"></i>
                 </div>
                 <div>
-                  <strong>Kuis Sejarah dibuat</strong>
+                  <strong>Materi pengayaan baru ditambahkan</strong>
                   <small>2 jam yang lalu</small>
                 </div>
               </div>
@@ -458,7 +625,7 @@
           </div>
 
           <div class="side-card">
-            <h5>Performa Kelas</h5>
+            <h5>Performa English Class</h5>
 
             <div class="performance-box">
               <div class="circle-progress">
@@ -469,13 +636,14 @@
               </div>
 
               <p>
-                Sebagian besar siswa menunjukkan perkembangan baik pada materi minggu ini.
+                Sebagian besar siswa menunjukkan perkembangan baik pada vocabulary
+                dan conversation practice.
               </p>
             </div>
           </div>
 
           <div class="side-card">
-            <h5>Top Siswa</h5>
+            <h5>Top English Learners</h5>
 
             <div class="top-student">
               <span>1</span>
@@ -495,6 +663,25 @@
               <small>980 poin</small>
             </div>
           </div>
+
+          <div class="side-card">
+            <h5>Distribusi Rekomendasi</h5>
+
+            <div class="summary-row">
+              <span>Pengayaan</span>
+              <strong>8 siswa</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Latihan</span>
+              <strong>18 siswa</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Remedial</span>
+              <strong>10 siswa</strong>
+            </div>
+          </div>
         </aside>
       </div>
     </main>
@@ -505,7 +692,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content custom-modal">
         <div class="modal-header">
-          <h5 class="modal-title">Tambah Materi Baru</h5>
+          <h5 class="modal-title">Tambah Materi English</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
@@ -513,24 +700,48 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Judul Materi</label>
-              <input type="text" class="form-control" id="materialTitle" placeholder="Contoh: Aljabar dan Persamaan Linear" required />
+              <input
+                type="text"
+                class="form-control"
+                id="materialTitle"
+                placeholder="Contoh: Vocabulary: Daily Activities"
+                required
+              />
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Mata Pelajaran</label>
+              <label class="form-label">Kategori English</label>
               <select class="form-select" id="materialSubject" required>
-                <option value="">Pilih mata pelajaran</option>
-                <option>Matematika</option>
-                <option>Bahasa Indonesia</option>
-                <option>IPA</option>
-                <option>Sejarah</option>
-                <option>Bahasa Inggris</option>
+                <option value="">Pilih kategori</option>
+                <option>Vocabulary</option>
+                <option>Grammar</option>
+                <option>Reading</option>
+                <option>Speaking</option>
+                <option>Listening</option>
+                <option>Writing</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Jenis Materi</label>
+              <select class="form-select" id="materialType" required>
+                <option value="">Pilih jenis materi</option>
+                <option>Dasar</option>
+                <option>Latihan</option>
+                <option>Pengayaan</option>
+                <option>Remedial</option>
               </select>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Deskripsi Singkat</label>
-              <textarea class="form-control" id="materialDescription" rows="3" placeholder="Tulis ringkasan materi..." required></textarea>
+              <textarea
+                class="form-control"
+                id="materialDescription"
+                rows="3"
+                placeholder="Tulis ringkasan materi..."
+                required
+              ></textarea>
             </div>
 
             <div class="mb-3">
@@ -543,8 +754,12 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan Materi</button>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Batal
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Simpan Materi
+            </button>
           </div>
         </form>
       </div>
@@ -556,7 +771,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content custom-modal">
         <div class="modal-header">
-          <h5 class="modal-title">Buat Kuis Baru</h5>
+          <h5 class="modal-title">Buat Kuis English</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
@@ -564,34 +779,61 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Judul Kuis</label>
-              <input type="text" class="form-control" id="quizTitle" placeholder="Contoh: Kuis Aljabar" required />
+              <input
+                type="text"
+                class="form-control"
+                id="quizTitle"
+                placeholder="Contoh: Daily Routine Vocabulary Quiz"
+                required
+              />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Materi Terkait</label>
               <select class="form-select" id="quizMaterial" required>
                 <option value="">Pilih materi</option>
-                <option>Aljabar dan Persamaan Linear</option>
-                <option>Teks Eksplanasi</option>
-                <option>Sistem Pernapasan Manusia</option>
+                <option>Vocabulary: Daily Activities</option>
+                <option>Grammar: Simple Present Tense</option>
+                <option>Daily Conversation Practice</option>
+                <option>Reading: My Daily Routine</option>
               </select>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Jumlah Soal</label>
-                <input type="number" class="form-control" id="quizQuestionCount" min="1" value="5" required />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quizQuestionCount"
+                  min="1"
+                  value="10"
+                  required
+                />
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Poin Maksimal</label>
-                <input type="number" class="form-control" id="quizPoints" min="10" value="100" required />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quizPoints"
+                  min="10"
+                  value="100"
+                  required
+                />
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label">Contoh Soal Pertama</label>
-              <textarea class="form-control" id="quizQuestion" rows="3" placeholder="Tulis contoh soal..." required></textarea>
+              <textarea
+                class="form-control"
+                id="quizQuestion"
+                rows="3"
+                placeholder='Contoh: What is the meaning of "wake up"?'
+                required
+              ></textarea>
             </div>
 
             <div class="mb-3">
@@ -604,8 +846,12 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-success">Simpan Kuis</button>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Batal
+            </button>
+            <button type="submit" class="btn btn-success">
+              Simpan Kuis
+            </button>
           </div>
         </form>
       </div>
