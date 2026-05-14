@@ -1,81 +1,117 @@
 const loginForm = document.getElementById("loginForm");
 const alertBox = document.getElementById("alertBox");
-const loginButton = document.getElementById("loginButton");
+const loginBtn = document.getElementById("loginBtn");
+const btnText = document.getElementById("btnText");
+const btnLoader = document.getElementById("btnLoader");
 const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");
+const roleInput = document.getElementById("role");
+const roleTabs = document.querySelectorAll(".role-tab");
+const tabIndicator = document.querySelector(".tab-indicator");
+const registerLink = document.getElementById("registerLink");
 
-const showAlert = (type, message) => {
-  alertBox.className = `alert alert-${type}`;
-  alertBox.textContent = message;
-};
+// Pre-select role from URL query param
+const params = new URLSearchParams(window.location.search);
+const initialRole = params.get("role") === "teacher" ? "teacher" : "student";
+setRole(initialRole);
+updateRegisterLink();
 
-const hideAlert = () => {
-  alertBox.className = "alert d-none";
-  alertBox.textContent = "";
-};
+function setRole(role) {
+  roleInput.value = role;
+  roleTabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.role === role));
+  tabIndicator.classList.toggle("right", role === "teacher");
+  updateRegisterLink();
+}
+
+function updateRegisterLink() {
+  registerLink.href = `/register?role=${roleInput.value}`;
+}
+
+roleTabs.forEach((tab) => tab.addEventListener("click", () => setRole(tab.dataset.role)));
 
 togglePassword.addEventListener("click", () => {
-  const isPassword = passwordInput.type === "password";
-
-  passwordInput.type = isPassword ? "text" : "password";
-  togglePassword.textContent = isPassword ? "Sembunyikan" : "Lihat";
+  passwordInput.type = passwordInput.type === "password" ? "text" : "password";
 });
 
-loginForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+function showAlert(type, html) {
+  alertBox.className = `alert-box ${type}`;
+  alertBox.innerHTML = html;
+}
+
+function hideAlert() {
+  alertBox.className = "alert-box hidden";
+  alertBox.innerHTML = "";
+}
+
+function setLoading(loading) {
+  loginBtn.disabled = loading;
+  btnText.textContent = loading ? "Memproses..." : "Masuk";
+  btnLoader.classList.toggle("hidden", !loading);
+}
+
+async function sendResendRequest(email) {
+  try {
+    const res = await fetch("/api/auth/resend-verification", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const result = await res.json();
+    showAlert(result.success ? "success" : "danger", result.message);
+  } catch {
+    showAlert("danger", "Tidak dapat terhubung ke server.");
+  }
+}
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
   hideAlert();
 
-  const role = document.getElementById("role").value;
   const email = document.getElementById("email").value.trim();
   const password = passwordInput.value;
 
-  if (!role || !email || !password) {
-    showAlert("danger", "Role, email, dan password wajib diisi.");
+  if (!email || !password) {
+    showAlert("danger", "Email dan password wajib diisi.");
     return;
   }
 
-  loginButton.disabled = true;
-  loginButton.textContent = "Memproses...";
+  setLoading(true);
 
-  setTimeout(() => {
-    localStorage.setItem("gamigame_token", "dummy-token-preview");
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    if (role === "teacher") {
-      localStorage.setItem(
-        "gamigame_user",
-        JSON.stringify({
-          id: "preview-teacher",
-          full_name: "Guru Gamigame",
-          username: "guru",
-          email: email,
-          role: "teacher",
-          is_active: true,
-        })
-      );
+    const result = await response.json();
 
-      showAlert("success", "Login berhasil. Mengalihkan ke dashboard guru...");
-
-      setTimeout(() => {
-        window.location.href = "/dashboard-teacher";
-      }, 800);
-    } else {
-      localStorage.setItem(
-        "gamigame_user",
-        JSON.stringify({
-          id: "preview-student",
-          full_name: "Fahmira",
-          username: "fahmira",
-          email: email,
-          role: "student",
-          is_active: true,
-        })
-      );
-
-      showAlert("success", "Login berhasil. Mengalihkan ke dashboard siswa...");
-
-      setTimeout(() => {
-        window.location.href = "/dashboard-student";
-      }, 800);
+    if (!response.ok || !result.success) {
+      if (result.code === "EMAIL_NOT_VERIFIED") {
+        showAlert(
+          "danger",
+          `${result.message} <button id="resendInline" style="margin-top:8px;display:block;width:100%;padding:8px;background:#7c3aed;color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;">Kirim Ulang Email Verifikasi</button>`
+        );
+        document.getElementById("resendInline").addEventListener("click", () =>
+          sendResendRequest(email)
+        );
+      } else {
+        showAlert("danger", result.message || "Email atau password salah.");
+      }
+      return;
     }
-  }, 700);
+
+    localStorage.setItem("gamigame_token", result.data.token);
+    localStorage.setItem("gamigame_user", JSON.stringify(result.data.user));
+
+    showAlert("success", "Login berhasil! Mengalihkan...");
+    const role = result.data.user.role;
+    setTimeout(() => {
+      window.location.href = role === "teacher" ? "/dashboard-teacher" : "/dashboard-student";
+    }, 700);
+  } catch {
+    showAlert("danger", "Tidak dapat terhubung ke server. Pastikan server berjalan.");
+  } finally {
+    setLoading(false);
+  }
 });
