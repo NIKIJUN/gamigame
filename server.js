@@ -5,14 +5,10 @@ dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
 require("dotenv").config();
 
-const express = require("express");
 const connectDB = require("./config/db");
-const User = require("./models/User");
 
-const app = express();
-
-app.use(express.json());
-app.use(express.static("public"));
+// Import app dari src/app.js
+const app = require("./src/app");
 
 // Cek apakah MONGODB_URI terbaca dari .env
 if (!process.env.MONGODB_URI) {
@@ -22,51 +18,6 @@ if (!process.env.MONGODB_URI) {
 
 // koneksi database
 connectDB();
-
-// route utama
-app.get("/", (req, res) => {
-  res.send("Server berjalan dan siap konek ke MongoDB");
-});
-
-// tambah user
-app.post("/users", async (req, res) => {
-  try {
-    const { nama, email, umur } = req.body;
-
-    const user = await User.create({
-      nama,
-      email,
-      umur,
-    });
-
-    res.status(201).json({
-      message: "User berhasil ditambahkan",
-      data: user,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Gagal menambahkan user",
-      error: error.message,
-    });
-  }
-});
-
-// ambil semua user
-app.get("/users", async (req, res) => {
-  try {
-    const users = await User.find();
-
-    res.json({
-      message: "Data user berhasil diambil",
-      data: users,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Gagal mengambil data user",
-      error: error.message,
-    });
-  }
-});
 
 const PORT = process.env.PORT || 5000;
 
