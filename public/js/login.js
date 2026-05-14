@@ -25,11 +25,12 @@ loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
   hideAlert();
 
+  const role = document.getElementById("role").value;
   const email = document.getElementById("email").value.trim();
   const password = passwordInput.value;
 
-  if (!email || !password) {
-    showAlert("danger", "Email dan password wajib diisi.");
+  if (!role || !email || !password) {
+    showAlert("danger", "Role, email, dan password wajib diisi.");
     return;
   }
 
@@ -39,22 +40,42 @@ loginForm.addEventListener("submit", (event) => {
   setTimeout(() => {
     localStorage.setItem("gamigame_token", "dummy-token-preview");
 
-    localStorage.setItem(
-      "gamigame_user",
-      JSON.stringify({
-        id: "preview-teacher",
-        full_name: "Guru",
-        username: "guru",
-        email: email,
-        role: "teacher",
-        is_active: true,
-      })
-    );
+    if (role === "teacher") {
+      localStorage.setItem(
+        "gamigame_user",
+        JSON.stringify({
+          id: "preview-teacher",
+          full_name: "Guru Gamigame",
+          username: "guru",
+          email: email,
+          role: "teacher",
+          is_active: true,
+        })
+      );
 
-    showAlert("success", "Login berhasil. Mengalihkan ke dashboard guru...");
+      showAlert("success", "Login berhasil. Mengalihkan ke dashboard guru...");
 
-    setTimeout(() => {
-      window.location.href = "/dashboard-teacher";
-    }, 800);
+      setTimeout(() => {
+        window.location.href = "/dashboard-teacher";
+      }, 800);
+    } else {
+      localStorage.setItem(
+        "gamigame_user",
+        JSON.stringify({
+          id: "preview-student",
+          full_name: "Fahmira",
+          username: "fahmira",
+          email: email,
+          role: "student",
+          is_active: true,
+        })
+      );
+
+      showAlert("success", "Login berhasil. Mengalihkan ke dashboard siswa...");
+
+      setTimeout(() => {
+        window.location.href = "/dashboard-student";
+      }, 800);
+    }
   }, 700);
 });

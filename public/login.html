@@ -24,7 +24,9 @@
                 <div class="brand-icon mb-3">
                   G
                 </div>
+
                 <h1 class="h3 fw-bold mb-1">Gamigame</h1>
+
                 <p class="text-muted mb-0">
                   Masuk ke akun siswa atau guru
                 </p>
@@ -33,6 +35,20 @@
               <div id="alertBox" class="alert d-none" role="alert"></div>
 
               <form id="loginForm" novalidate>
+                <div class="mb-3">
+                  <label for="role" class="form-label">Login Sebagai</label>
+                  <select
+                    class="form-select form-select-lg"
+                    id="role"
+                    name="role"
+                    required
+                  >
+                    <option value="">Pilih role</option>
+                    <option value="student">Siswa</option>
+                    <option value="teacher">Guru</option>
+                  </select>
+                </div>
+
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
@@ -43,6 +59,7 @@
                     placeholder="nama@email.com"
                     required
                   />
+
                   <div class="invalid-feedback">
                     Email wajib diisi dengan format yang benar.
                   </div>
@@ -60,6 +77,7 @@
                       placeholder="Masukkan password"
                       required
                     />
+
                     <button
                       class="btn btn-outline-secondary"
                       type="button"
@@ -82,8 +100,6 @@
                   Login
                 </button>
               </form>
-
-              
             </div>
           </div>
 
@@ -102,9 +118,6 @@
     </div>
   </main>
 
-  <script src="/js/login.js">
-    window.location.href = "/dashboard-student";
-
-  </script>
+  <script src="/js/login.js"></script>
 </body>
 </html>

@@ -25,6 +25,7 @@ body {
   left: 0;
   z-index: 100;
   transition: 0.3s ease;
+  overflow-y: auto;
 }
 
 .brand {
@@ -334,8 +335,8 @@ body {
   color: #ffffff;
   padding: 18px;
   border-radius: 16px;
-  font-size: 20px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.8;
   margin: 14px 0;
   font-family: "Courier New", monospace;
 }
@@ -388,6 +389,35 @@ body {
   background: linear-gradient(135deg, #2563eb, #38bdf8);
 }
 
+.dialog-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 20px;
+  background: #f8fafc;
+  border: 1px solid #dbeafe;
+}
+
+.dialog-line {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.dialog-line strong {
+  min-width: 70px;
+  color: #4f46e5;
+}
+
+.dialog-line span {
+  color: #374151;
+  line-height: 1.6;
+}
+
 .media-box {
   display: flex;
   align-items: center;
@@ -408,6 +438,23 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 64px;
+}
+
+.decision-path-material {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.decision-path-material span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .step-list {
@@ -573,6 +620,15 @@ body {
 .reward-card strong {
   font-size: 28px;
   color: #ea580c;
+}
+
+.example-box ul {
+  padding-left: 20px;
+}
+
+.example-box li {
+  margin-bottom: 8px;
+  color: #374151;
 }
 
 @media (max-width: 1100px) {

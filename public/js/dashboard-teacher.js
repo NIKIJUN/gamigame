@@ -13,7 +13,7 @@ toggleSidebar.addEventListener("click", () => {
 const savedUser = localStorage.getItem("gamigame_user");
 
 let teacher = {
-  full_name: "Guru",
+  full_name: "Guru Gamigame",
   username: "guru",
   role: "teacher",
 };
@@ -46,15 +46,24 @@ materialForm.addEventListener("submit", (event) => {
 
   const title = document.getElementById("materialTitle").value.trim();
   const subject = document.getElementById("materialSubject").value;
+  const type = document.getElementById("materialType").value;
   const description = document.getElementById("materialDescription").value.trim();
   const status = document.getElementById("materialStatus").value;
 
-  if (!title || !subject || !description) {
+  if (!title || !subject || !type || !description) {
     alert("Semua field materi wajib diisi.");
     return;
   }
 
   const statusClass = status === "Aktif" ? "active" : "draft";
+
+  let typeClass = "active";
+
+  if (type === "Pengayaan") {
+    typeClass = "pending";
+  } else if (type === "Remedial") {
+    typeClass = "draft";
+  }
 
   const row = document.createElement("tr");
 
@@ -64,6 +73,7 @@ materialForm.addEventListener("submit", (event) => {
       <small>${description}</small>
     </td>
     <td>${subject}</td>
+    <td><span class="status ${typeClass}">${type}</span></td>
     <td><span class="status ${statusClass}">${status}</span></td>
     <td>Belum ada</td>
     <td>
@@ -84,7 +94,7 @@ materialForm.addEventListener("submit", (event) => {
   const modal = bootstrap.Modal.getInstance(modalElement);
   modal.hide();
 
-  alert("Materi berhasil ditambahkan secara preview.");
+  alert("Materi English berhasil ditambahkan secara preview.");
 });
 
 quizForm.addEventListener("submit", (event) => {
@@ -107,7 +117,7 @@ quizForm.addEventListener("submit", (event) => {
   const modal = bootstrap.Modal.getInstance(modalElement);
   modal.hide();
 
-  alert("Kuis berhasil dibuat secara preview. Nanti data ini bisa disimpan ke MongoDB.");
+  alert("Kuis English berhasil dibuat secara preview. Nanti data ini bisa disimpan ke MongoDB.");
 });
 
 document.addEventListener("click", (event) => {
