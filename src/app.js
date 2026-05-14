@@ -6,6 +6,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Static files
+app.use(
+  express.static(path.join(__dirname, "../public"), {
+    index: false,
+  })
+);
+
 // API routes
 try {
   const materialRoutes = require("./routes/materialRoutes");
@@ -21,7 +28,11 @@ try {
 
 // Page routes
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/login.html"));
+  res.sendFile(path.join(__dirname, "../public/landing.html"));
+});
+
+app.get("/landing", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/landing.html"));
 });
 
 app.get("/login", (req, res) => {
@@ -47,12 +58,5 @@ app.get("/material", (req, res) => {
 app.get("/quiz", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/quiz.html"));
 });
-
-// Static files
-app.use(
-  express.static(path.join(__dirname, "../public"), {
-    index: false,
-  })
-);
 
 module.exports = app;
