@@ -14,6 +14,9 @@ app.use(
 );
 
 // API routes
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+
 try {
   const materialRoutes = require("./routes/materialRoutes");
   const quizRoutes = require("./routes/quizRoutes");
@@ -41,6 +44,10 @@ app.get("/login", (req, res) => {
 
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
+app.get("/verify", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/verify.html"));
 });
 
 app.get("/dashboard-student", (req, res) => {

@@ -1,61 +1,99 @@
 const registerForm = document.getElementById("registerForm");
 const alertBox = document.getElementById("alertBox");
-const registerButton = document.getElementById("registerButton");
+const registerBtn = document.getElementById("registerBtn");
+const btnText = document.getElementById("btnText");
+const btnLoader = document.getElementById("btnLoader");
 const togglePassword = document.getElementById("togglePassword");
+const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirmPassword");
+const roleInput = document.getElementById("role");
+const roleTabs = document.querySelectorAll(".role-tab");
+const tabIndicator = document.querySelector(".tab-indicator");
+const loginLink = document.getElementById("loginLink");
 
-const showAlert = (type, message) => {
-  alertBox.className = `alert alert-${type}`;
-  alertBox.textContent = message;
-};
+// Pre-select role from URL query param
+const params = new URLSearchParams(window.location.search);
+const initialRole = params.get("role") === "teacher" ? "teacher" : "student";
+setRole(initialRole);
 
-const hideAlert = () => {
-  alertBox.className = "alert d-none";
-  alertBox.textContent = "";
-};
+updateLoginLink();
 
-const isValidUsername = (username) => {
-  return /^[A-Za-z0-9_]+$/.test(username);
-};
+function setRole(role) {
+  roleInput.value = role;
+  roleTabs.forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.role === role);
+  });
+  if (role === "teacher") {
+    tabIndicator.classList.add("right");
+  } else {
+    tabIndicator.classList.remove("right");
+  }
+  updateLoginLink();
+}
 
-const isValidPassword = (password) => {
-  const hasUppercase = /[A-Z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
+function updateLoginLink() {
+  loginLink.href = `/login?role=${roleInput.value}`;
+}
 
-  return password.length >= 8 && hasUppercase && hasNumber;
-};
-
-togglePassword.addEventListener("click", () => {
-  const isPasswordHidden = passwordInput.type === "password";
-
-  passwordInput.type = isPasswordHidden ? "text" : "password";
-  togglePassword.textContent = isPasswordHidden ? "Sembunyikan" : "Lihat";
+roleTabs.forEach((tab) => {
+  tab.addEventListener("click", () => setRole(tab.dataset.role));
 });
 
-registerForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
+// Toggle password visibility
+togglePassword.addEventListener("click", () => {
+  const isHidden = passwordInput.type === "password";
+  passwordInput.type = isHidden ? "text" : "password";
+});
+
+toggleConfirmPassword.addEventListener("click", () => {
+  const isHidden = confirmPasswordInput.type === "password";
+  confirmPasswordInput.type = isHidden ? "text" : "password";
+});
+
+function showAlert(type, message) {
+  alertBox.className = `alert-box ${type}`;
+  alertBox.textContent = message;
+  alertBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function hideAlert() {
+  alertBox.className = "alert-box hidden";
+  alertBox.textContent = "";
+}
+
+function setLoading(loading) {
+  registerBtn.disabled = loading;
+  btnText.textContent = loading ? "Memproses..." : "Daftar Sekarang";
+  btnLoader.classList.toggle("hidden", !loading);
+}
+
+const isValidUsername = (v) => /^[A-Za-z0-9_]+$/.test(v);
+const isValidPassword = (v) => v.length >= 8 && /[A-Z]/.test(v) && /[0-9]/.test(v);
+
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
   hideAlert();
 
-  const role = document.getElementById("role").value;
+  const role = roleInput.value;
   const full_name = document.getElementById("full_name").value.trim();
   const username = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = passwordInput.value;
   const confirmPassword = confirmPasswordInput.value;
 
-  if (!role || !full_name || !username || !email || !password || !confirmPassword) {
+  if (!full_name || !username || !email || !password || !confirmPassword) {
     showAlert("danger", "Semua field wajib diisi.");
     return;
   }
 
   if (full_name.length < 3 || full_name.length > 100) {
-    showAlert("danger", "Nama lengkap harus 3 sampai 100 karakter.");
+    showAlert("danger", "Nama lengkap harus 3–100 karakter.");
     return;
   }
 
   if (username.length < 3 || username.length > 50) {
-    showAlert("danger", "Username harus 3 sampai 50 karakter.");
+    showAlert("danger", "Username harus 3–50 karakter.");
     return;
   }
 
@@ -74,26 +112,13 @@ registerForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  registerButton.disabled = true;
-  registerButton.textContent = "Memproses...";
+  setLoading(true);
 
   try {
-    const endpoint =
-      role === "teacher"
-        ? "/api/auth/register/teacher"
-        : "/api/auth/register/student";
-
-    const response = await fetch(endpoint, {
+    const response = await fetch("/api/auth/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        full_name,
-        username,
-        email,
-        password,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ role, full_name, username, email, password }),
     });
 
     const result = await response.json();
@@ -103,15 +128,14 @@ registerForm.addEventListener("submit", async (event) => {
       return;
     }
 
-    showAlert("success", "Pendaftaran berhasil. Silakan login.");
-
-    setTimeout(() => {
-      window.location.href = "/login";
-    }, 1000);
-  } catch (error) {
-    showAlert("danger", "Backend belum aktif atau server tidak dapat dihubungi.");
+    showAlert(
+      "success",
+      `Pendaftaran berhasil! 🎉 Kami mengirim link verifikasi ke <strong>${email}</strong>. Cek inbox (dan folder spam) kamu, lalu klik link untuk mengaktifkan akun.`
+    );
+    registerForm.reset();
+  } catch {
+    showAlert("danger", "Tidak dapat terhubung ke server. Pastikan server berjalan.");
   } finally {
-    registerButton.disabled = false;
-    registerButton.textContent = "Daftar";
+    setLoading(false);
   }
 });

@@ -3,95 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aplikasi Edukasi</title>
-
+  <title>Gamigame — Belajar Seru, Raih Prestasi!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/landing.css" />
 </head>
 <body>
+
   <header class="navbar">
     <div class="container nav-wrapper">
-      <a href="./index.html" class="logo">
-        <span class="logo-icon">E</span>
-        <span>EduLearn</span>
+      <a href="/" class="logo">
+        <span class="logo-icon">🎮</span>
+        <span>Gamigame</span>
       </a>
 
       <nav class="nav-menu" id="navMenu">
         <a href="#fitur">Fitur</a>
         <a href="#cara-kerja">Cara Kerja</a>
-        <a href="./login.html">Login</a>
-        <a href="./register.html" class="btn btn-small">Daftar</a>
+        <a href="#bergabung">Bergabung</a>
+        <a href="./login.html" class="btn-outline-nav">Masuk</a>
+        <a href="./register.html" class="btn-nav">Daftar</a>
       </nav>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
-        ☰
-      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
     </div>
   </header>
 
   <main>
+
     <section class="hero">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+
       <div class="container hero-wrapper">
         <div class="hero-content">
-          <p class="badge">Platform belajar online interaktif</p>
-
-          <h1>Belajar lebih mudah, terarah, dan menyenangkan</h1>
-
-          <p class="hero-text">
-            Akses materi, ikuti kuis, dan pantau perkembangan belajar dalam satu
-            aplikasi edukasi yang sederhana dan mudah digunakan.
-          </p>
-
-          <div class="hero-actions">
-            <a href="./register.html" class="btn btn-primary">Mulai Sekarang</a>
-            <a href="./login.html" class="btn btn-secondary">Masuk Akun</a>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Platform Gamifikasi Pendidikan
           </div>
 
-          <div class="hero-stats">
-            <div>
-              <strong>24/7</strong>
-              <span>Akses belajar</span>
+          <h1>Belajar Jadi <span class="highlight">Seru</span> &amp; Penuh <span class="highlight">Prestasi!</span></h1>
+
+          <p class="hero-text">
+            Gamigame mengubah proses belajar menjadi petualangan seru. Kumpulkan poin, raih pencapaian, dan bersaing dengan teman dalam satu platform yang menyenangkan.
+          </p>
+
+          <div class="role-cards" id="bergabung">
+            <div class="role-card student-card">
+              <div class="role-icon">🎓</div>
+              <h3>Saya Siswa</h3>
+              <p>Belajar, kerjakan kuis, dan kumpulkan poin XP!</p>
+              <div class="role-actions">
+                <a href="./register.html?role=student" class="btn btn-primary">Daftar Gratis</a>
+                <a href="./login.html?role=student" class="btn btn-ghost">Masuk</a>
+              </div>
             </div>
-            <div>
-              <strong>Quiz</strong>
-              <span>Latihan interaktif</span>
-            </div>
-            <div>
-              <strong>Materi</strong>
-              <span>Tersusun rapi</span>
+
+            <div class="role-card teacher-card">
+              <div class="role-icon">👩‍🏫</div>
+              <h3>Saya Guru</h3>
+              <p>Kelola kelas, buat kuis, dan pantau siswa!</p>
+              <div class="role-actions">
+                <a href="./register.html?role=teacher" class="btn btn-accent">Daftar Gratis</a>
+                <a href="./login.html?role=teacher" class="btn btn-ghost">Masuk</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="hero-card">
-          <div class="card-header">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="preview-card">
+          <div class="preview-header">
+            <div class="preview-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="preview-label">Dashboard Siswa</span>
           </div>
 
-          <div class="learning-card">
-            <div class="subject-icon">📘</div>
-            <div>
-              <h3>Materi Bahasa Inggris</h3>
-              <p>Grammar, vocabulary, reading, dan latihan soal.</p>
+          <div class="preview-profile">
+            <div class="avatar">A</div>
+            <div class="preview-info">
+              <div class="player-name">Andi Pratama</div>
+              <div class="player-level">⭐ Level 12 · Pelajar Hebat</div>
+            </div>
+            <div class="xp-badge">2.450 XP</div>
+          </div>
+
+          <div class="xp-bar-wrap">
+            <div class="xp-bar-labels">
+              <span>XP Hari Ini</span>
+              <span>320 / 500</span>
+            </div>
+            <div class="xp-bar">
+              <div class="xp-fill"></div>
             </div>
           </div>
 
-          <div class="progress-box">
-            <div class="progress-info">
-              <span>Progress Belajar</span>
-              <strong>78%</strong>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill"></div>
-            </div>
+          <div class="preview-achievements">
+            <div class="achievement">🔥 <span>7 Hari Beruntun</span></div>
+            <div class="achievement">🏆 <span>Top 3 Kelas</span></div>
+            <div class="achievement">📚 <span>10 Materi</span></div>
           </div>
 
-          <div class="quiz-box">
-            <p>Kuis Hari Ini</p>
-            <h4>Simple Present Tense</h4>
-            <a href="./quiz.html">Kerjakan Kuis →</a>
+          <div class="preview-challenge">
+            <div class="challenge-label">Tantangan Hari Ini</div>
+            <div class="challenge-title">Kuis: Simple Present Tense</div>
+            <div class="challenge-meta">🕐 15 menit &nbsp;·&nbsp; 20 soal &nbsp;·&nbsp; +150 XP</div>
+            <a href="./login.html" class="btn btn-primary challenge-btn">Mulai Kuis →</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <strong>500+</strong>
+          <span>Siswa Aktif</span>
+        </div>
+        <div class="stat-item">
+          <strong>50+</strong>
+          <span>Materi Tersedia</span>
+        </div>
+        <div class="stat-item">
+          <strong>200+</strong>
+          <span>Kuis Interaktif</span>
+        </div>
+        <div class="stat-item">
+          <strong>24/7</strong>
+          <span>Akses Belajar</span>
         </div>
       </div>
     </section>
@@ -99,44 +142,46 @@
     <section class="features" id="fitur">
       <div class="container">
         <div class="section-title">
-          <p>Fitur Unggulan</p>
-          <h2>Dibuat untuk membantu proses belajar</h2>
+          <span class="section-tag">Fitur Unggulan</span>
+          <h2>Semua yang kamu butuhkan untuk belajar</h2>
+          <p>Dirancang agar belajar terasa seperti bermain game — seru, menantang, dan bikin nagih!</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card">
-            <div class="feature-icon">📚</div>
+            <div class="feature-icon purple">🎯</div>
+            <h3>Sistem Poin &amp; XP</h3>
+            <p>Dapatkan poin setiap menyelesaikan materi dan kuis. Naik level dan tunjukkan kehebatanmu!</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon amber">🏆</div>
+            <h3>Papan Peringkat</h3>
+            <p>Bersaing dengan teman sekelas di leaderboard. Siapa yang paling rajin belajar?</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon blue">📚</div>
             <h3>Materi Terstruktur</h3>
-            <p>
-              Materi pembelajaran tersusun jelas agar siswa lebih mudah memahami
-              setiap topik.
-            </p>
+            <p>Konten pembelajaran tersusun rapi per topik. Mudah diakses kapan saja dan di mana saja.</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">📝</div>
+            <div class="feature-icon green">✅</div>
             <h3>Kuis Interaktif</h3>
-            <p>
-              Latihan soal membantu mengukur pemahaman siswa setelah mempelajari
-              materi.
-            </p>
+            <p>Uji pemahaman lewat kuis yang menarik. Langsung tahu hasilnya setelah selesai!</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">👩‍🏫</div>
-            <h3>Dashboard Guru</h3>
-            <p>
-              Guru dapat mengelola materi dan memantau aktivitas pembelajaran.
-            </p>
+            <div class="feature-icon pink">🎖️</div>
+            <h3>Pencapaian &amp; Badge</h3>
+            <p>Kumpulkan badge spesial untuk setiap pencapaian belajarmu. Tunjukkan koleksimu!</p>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Dashboard Siswa</h3>
-            <p>
-              Siswa dapat melihat materi, mengerjakan kuis, dan mengikuti proses
-              belajar dengan mudah.
-            </p>
+            <div class="feature-icon teal">👩‍🏫</div>
+            <h3>Kelola Kelas Mudah</h3>
+            <p>Guru dapat mengelola materi, membuat kuis, dan memantau perkembangan siswa dengan mudah.</p>
           </article>
         </div>
       </div>
@@ -145,59 +190,100 @@
     <section class="steps" id="cara-kerja">
       <div class="container">
         <div class="section-title">
-          <p>Cara Kerja</p>
-          <h2>Mulai belajar dalam beberapa langkah</h2>
+          <span class="section-tag">Cara Kerja</span>
+          <h2>Mulai dalam 4 langkah mudah</h2>
         </div>
 
         <div class="steps-grid">
           <div class="step-card">
-            <span>01</span>
-            <h3>Daftar Akun</h3>
-            <p>Buat akun baru sebagai siswa atau guru melalui halaman register.</p>
+            <div class="step-num">01</div>
+            <div class="step-icon">📝</div>
+            <h3>Pilih Peranmu</h3>
+            <p>Daftar sebagai Siswa atau Guru secara gratis dalam hitungan menit.</p>
           </div>
+          <div class="step-connector"></div>
 
           <div class="step-card">
-            <span>02</span>
-            <h3>Login</h3>
-            <p>Masuk ke akun untuk mengakses dashboard sesuai peran pengguna.</p>
+            <div class="step-num">02</div>
+            <div class="step-icon">🔑</div>
+            <h3>Masuk &amp; Jelajahi</h3>
+            <p>Login dan lihat dashboard kamu. Temukan materi dan tantangan yang menunggu.</p>
           </div>
+          <div class="step-connector"></div>
 
           <div class="step-card">
-            <span>03</span>
-            <h3>Akses Materi</h3>
-            <p>Pelajari materi yang tersedia melalui halaman pembelajaran.</p>
+            <div class="step-num">03</div>
+            <div class="step-icon">📖</div>
+            <h3>Pelajari Materi</h3>
+            <p>Baca materi yang tersusun rapi dan kumpulkan XP setiap menyelesaikan topik.</p>
           </div>
+          <div class="step-connector"></div>
 
           <div class="step-card">
-            <span>04</span>
-            <h3>Kerjakan Kuis</h3>
-            <p>Uji pemahaman dengan kuis dan latihan yang tersedia.</p>
+            <div class="step-num">04</div>
+            <div class="step-icon">🏅</div>
+            <h3>Kuis &amp; Raih Badge</h3>
+            <p>Kerjakan kuis, dapatkan poin, dan kumpulkan badge untuk setiap pencapaian!</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="cta">
-      <div class="container cta-box">
-        <h2>Siap mulai belajar?</h2>
-        <p>
-          Masuk ke akun atau daftar sekarang untuk mulai menggunakan aplikasi.
-        </p>
-
-        <div class="cta-actions">
-          <a href="./register.html" class="btn btn-primary">Daftar Sekarang</a>
-          <a href="./login.html" class="btn btn-light">Login</a>
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-glow"></div>
+          <span class="cta-tag">Bergabung Sekarang — Gratis!</span>
+          <h2>Siap memulai petualangan belajar?</h2>
+          <p>Ribuan siswa dan guru sudah bergabung. Saatnya giliranmu!</p>
+          <div class="cta-actions">
+            <a href="./register.html?role=student" class="btn btn-cta-white">
+              🎓 Daftar sebagai Siswa
+            </a>
+            <a href="./register.html?role=teacher" class="btn btn-cta-outline">
+              👩‍🏫 Daftar sebagai Guru
+            </a>
+          </div>
+          <p class="cta-note">Sudah punya akun? <a href="./login.html">Masuk di sini</a></p>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
-    <div class="container footer-wrapper">
-      <p>&copy; <span id="year"></span> Aplikasi Edukasi. All rights reserved.</p>
-      <div>
-        <a href="./login.html">Login</a>
-        <a href="./register.html">Register</a>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo footer-logo">
+          <span class="logo-icon">🎮</span>
+          <span>Gamigame</span>
+        </a>
+        <p>Platform gamifikasi pendidikan untuk siswa dan guru Indonesia.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Masuk sebagai</h4>
+          <a href="./login.html?role=student">Siswa</a>
+          <a href="./login.html?role=teacher">Guru</a>
+        </div>
+        <div class="footer-col">
+          <h4>Daftar sebagai</h4>
+          <a href="./register.html?role=student">Siswa</a>
+          <a href="./register.html?role=teacher">Guru</a>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <a href="#fitur">Fitur</a>
+          <a href="#cara-kerja">Cara Kerja</a>
+          <a href="#bergabung">Bergabung</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Gamigame. Hak cipta dilindungi.</p>
       </div>
     </div>
   </footer>

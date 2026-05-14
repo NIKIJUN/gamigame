@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verifikasi Email — Gamigame</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/verify.css" />
+</head>
+<body>
+  <div class="auth-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+
+    <div class="verify-card" id="verifyCard">
+
+      <a href="/" class="brand">
+        <span class="brand-icon">🎮</span>
+        <span class="brand-name">Gamigame</span>
+      </a>
+
+      <!-- Loading state -->
+      <div id="stateLoading" class="state">
+        <div class="spinner"></div>
+        <h2>Memverifikasi email kamu...</h2>
+        <p>Mohon tunggu sebentar.</p>
+      </div>
+
+      <!-- Success state -->
+      <div id="stateSuccess" class="state hidden">
+        <div class="state-icon success-icon">✅</div>
+        <h2>Email Berhasil Diverifikasi!</h2>
+        <p>Selamat! Akunmu sudah aktif. Sekarang kamu bisa mulai belajar dan kumpulkan poin.</p>
+        <a href="/login" class="btn-primary">Masuk Sekarang →</a>
+      </div>
+
+      <!-- Error state -->
+      <div id="stateError" class="state hidden">
+        <div class="state-icon error-icon">⚠️</div>
+        <h2 id="errorTitle">Token Tidak Valid</h2>
+        <p id="errorMsg">Link verifikasi sudah kadaluarsa atau tidak valid. Minta link baru di bawah.</p>
+
+        <div class="resend-wrap">
+          <label for="resendEmail">Email kamu</label>
+          <input type="email" id="resendEmail" placeholder="nama@email.com" />
+          <button id="resendBtn" class="btn-primary" type="button">Kirim Ulang Email Verifikasi</button>
+          <div class="resend-alert hidden" id="resendAlert"></div>
+        </div>
+      </div>
+
+      <!-- No token state -->
+      <div id="stateNoToken" class="state hidden">
+        <div class="state-icon">📧</div>
+        <h2>Cek Email Kamu</h2>
+        <p>Kami sudah mengirim link verifikasi ke emailmu. Klik link di email untuk mengaktifkan akun.</p>
+        <p class="hint">Tidak menerima email? Cek folder spam, atau kirim ulang link.</p>
+
+        <div class="resend-wrap">
+          <label for="resendEmail2">Email kamu</label>
+          <input type="email" id="resendEmail2" placeholder="nama@email.com" />
+          <button id="resendBtn2" class="btn-primary" type="button">Kirim Ulang Email Verifikasi</button>
+          <div class="resend-alert hidden" id="resendAlert2"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/verify.js"></script>
+</body>
+</html>
