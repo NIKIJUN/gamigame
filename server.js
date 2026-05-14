@@ -12,6 +12,7 @@ const User = require("./models/User");
 const app = express();
 
 app.use(express.json());
+app.use(express.static("public"));
 
 // Cek apakah MONGODB_URI terbaca dari .env
 if (!process.env.MONGODB_URI) {
