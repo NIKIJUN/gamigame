@@ -1,15 +1,18 @@
 const mongoose = require("mongoose");
 
 const RETRY_DELAY_MS = 5000;
-const MAX_RETRIES = 3;
+const MAX_RETRIES = 5;
 
 const connectDB = async (retries = MAX_RETRIES) => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 10000,
-      connectTimeoutMS: 10000,
-      socketTimeoutMS: 45000,
+      serverSelectionTimeoutMS: 30000,
+      connectTimeoutMS: 30000,
+      socketTimeoutMS: 60000,
       family: 4,
+      retryReads: true,
+      retryWrites: true,
+      maxPoolSize: 10,
     });
 
     console.log("MongoDB Atlas berhasil terkoneksi");

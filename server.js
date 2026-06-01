@@ -1,6 +1,4 @@
 const dns = require("dns");
-
-// Paksa Node.js memakai DNS Cloudflare
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
 require("dotenv").config();
