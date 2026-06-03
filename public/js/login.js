@@ -10,6 +10,17 @@ const roleTabs = document.querySelectorAll(".role-tab");
 const tabIndicator = document.querySelector(".tab-indicator");
 const registerLink = document.getElementById("registerLink");
 
+// Forgot password modal elements
+const forgotModal = document.getElementById("forgotModal");
+const forgotModalCloseX = document.getElementById("forgotModalCloseX");
+const forgotModalCancel = document.getElementById("forgotModalCancel");
+const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+const forgotSubmitBtn = document.getElementById("forgotSubmitBtn");
+const forgotBtnText = document.getElementById("forgotBtnText");
+const forgotBtnLoader = document.getElementById("forgotBtnLoader");
+const forgotEmail = document.getElementById("forgotEmail");
+const forgotAlertBox = document.getElementById("forgotAlertBox");
+
 // Pre-select role from URL query param
 const params = new URLSearchParams(window.location.search);
 const initialRole = params.get("role") === "teacher" ? "teacher" : "student";
@@ -62,6 +73,83 @@ async function sendResendRequest(email) {
     showAlert("danger", "Tidak dapat terhubung ke server.");
   }
 }
+
+// ── Forgot Password Modal ────────────────────────────────────────────────────
+
+function openForgotModal() {
+  forgotEmail.value = document.getElementById("email").value.trim();
+  forgotAlertBox.className = "alert-box hidden";
+  forgotAlertBox.innerHTML = "";
+  forgotSubmitBtn.style.display = "";
+  setForgotLoading(false);
+  forgotModal.classList.remove("hidden");
+  forgotEmail.focus();
+}
+
+function closeForgotModal() {
+  forgotModal.classList.add("hidden");
+}
+
+function setForgotLoading(loading) {
+  forgotSubmitBtn.disabled = loading;
+  forgotBtnText.textContent = loading ? "Mengirim..." : "Kirim Link Reset";
+  forgotBtnLoader.classList.toggle("hidden", !loading);
+}
+
+function showForgotAlert(type, message) {
+  forgotAlertBox.className = `alert-box ${type}`;
+  forgotAlertBox.textContent = message;
+}
+
+forgotPasswordLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  openForgotModal();
+});
+
+forgotModalCloseX.addEventListener("click", closeForgotModal);
+forgotModalCancel.addEventListener("click", closeForgotModal);
+
+forgotModal.addEventListener("click", (e) => {
+  if (e.target === forgotModal) closeForgotModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !forgotModal.classList.contains("hidden")) closeForgotModal();
+});
+
+forgotSubmitBtn.addEventListener("click", async () => {
+  const email = forgotEmail.value.trim();
+
+  if (!email) {
+    showForgotAlert("danger", "Masukkan email kamu terlebih dahulu.");
+    return;
+  }
+
+  setForgotLoading(true);
+  forgotAlertBox.className = "alert-box hidden";
+
+  try {
+    const res = await fetch("/api/auth/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const result = await res.json();
+
+    if (result.success) {
+      showForgotAlert("success", result.message);
+      forgotSubmitBtn.style.display = "none";
+    } else {
+      showForgotAlert("danger", result.message || "Terjadi kesalahan. Coba lagi.");
+    }
+  } catch {
+    showForgotAlert("danger", "Tidak dapat terhubung ke server.");
+  } finally {
+    setForgotLoading(false);
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();

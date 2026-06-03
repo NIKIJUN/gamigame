@@ -50,6 +50,10 @@ app.get("/verify", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/verify.html"));
 });
 
+app.get("/reset-password", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/reset-password.html"));
+});
+
 app.get("/dashboard-student", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/dashboard-student.html"));
 });

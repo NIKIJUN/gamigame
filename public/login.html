@@ -54,7 +54,10 @@
         </div>
 
         <div class="field">
-          <label for="password">Password</label>
+          <div class="field-label-row">
+            <label for="password">Password</label>
+            <a href="#" class="forgot-link" id="forgotPasswordLink">Lupa password?</a>
+          </div>
           <div class="input-wrap">
             <input
               type="password"
@@ -81,6 +84,30 @@
         <a href="/register" id="registerLink">Daftar di sini</a>
       </p>
 
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay hidden" id="forgotModal" role="dialog" aria-modal="true" aria-labelledby="forgotModalTitle">
+    <div class="modal-card">
+      <button class="modal-close-x" id="forgotModalCloseX" aria-label="Tutup">&times;</button>
+      <div class="modal-icon">🔑</div>
+      <h2 class="modal-title" id="forgotModalTitle">Lupa Password?</h2>
+      <p class="modal-desc">Masukkan email akun kamu. Kami akan mengirim link untuk membuat password baru.</p>
+
+      <div class="alert-box hidden" id="forgotAlertBox" role="alert"></div>
+
+      <div class="field">
+        <label for="forgotEmail">Email</label>
+        <input type="email" id="forgotEmail" placeholder="nama@email.com" autocomplete="email" />
+      </div>
+
+      <button type="button" class="submit-btn" id="forgotSubmitBtn">
+        <span id="forgotBtnText">Kirim Link Reset</span>
+        <span id="forgotBtnLoader" class="loader hidden"></span>
+      </button>
+
+      <button type="button" class="modal-cancel" id="forgotModalCancel">Kembali ke Login</button>
     </div>
   </div>
 

@@ -12,6 +12,8 @@ router.post("/register", registerValidator, validate, authController.register);
 router.post("/login", loginValidator, validate, authController.login);
 router.get("/verify/:token", authController.verifyEmail);
 router.post("/resend-verification", authController.resendVerification);
+router.post("/forgot-password", authController.forgotPassword);
+router.post("/reset-password/:token", authController.resetPassword);
 
 router.get("/me", authenticate, (req, res) => {
   return successResponse(res, 200, "Data user berhasil diambil", { user: req.user });

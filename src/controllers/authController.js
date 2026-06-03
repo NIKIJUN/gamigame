@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { successResponse, errorResponse } = require("../utils/response");
 const { generateToken } = require("../utils/jwt");
-const { sendVerificationEmail } = require("../utils/email");
+const { sendVerificationEmail, sendPasswordResetEmail } = require("../utils/email");
 
 // ── Register ────────────────────────────────────────────────────────────────
 const register = async (req, res) => {
@@ -153,4 +153,68 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, verifyEmail, resendVerification, login };
+// ── Forgot Password ───────────────────────────────────────────────────────────
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return errorResponse(res, 422, "Email wajib diisi", []);
+    }
+
+    const user = await User.findOne({ email });
+
+    // Always return success to prevent email enumeration
+    if (!user || !user.is_verified) {
+      return successResponse(res, 200, "Jika email terdaftar dan sudah diverifikasi, link reset akan dikirim.", {});
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    user.reset_password_token = resetToken;
+    user.reset_password_token_expires = new Date(Date.now() + 60 * 60 * 1000); // 1 jam
+    await user.save();
+
+    try {
+      await sendPasswordResetEmail(email, user.full_name, resetToken);
+    } catch (emailErr) {
+      console.error("Gagal kirim email reset password:", emailErr.message);
+      return errorResponse(res, 500, "Gagal mengirim email. Coba lagi nanti.", []);
+    }
+
+    return successResponse(res, 200, "Link reset password telah dikirim ke email kamu.", {});
+  } catch (error) {
+    return errorResponse(res, 500, "Terjadi kesalahan server", [error.message]);
+  }
+};
+
+// ── Reset Password ────────────────────────────────────────────────────────────
+const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    if (!password || password.length < 8) {
+      return errorResponse(res, 422, "Password baru minimal 8 karakter", []);
+    }
+
+    const user = await User.findOne({
+      reset_password_token: token,
+      reset_password_token_expires: { $gt: new Date() },
+    }).select("+reset_password_token +reset_password_token_expires");
+
+    if (!user) {
+      return errorResponse(res, 400, "Token tidak valid atau sudah kadaluarsa. Minta link reset baru.", []);
+    }
+
+    user.password = await bcrypt.hash(password, 12);
+    user.reset_password_token = undefined;
+    user.reset_password_token_expires = undefined;
+    await user.save();
+
+    return successResponse(res, 200, "Password berhasil direset. Silakan login dengan password baru.", {});
+  } catch (error) {
+    return errorResponse(res, 500, "Terjadi kesalahan server", [error.message]);
+  }
+};
+
+module.exports = { register, verifyEmail, resendVerification, login, forgotPassword, resetPassword };
